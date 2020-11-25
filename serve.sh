@@ -56,7 +56,7 @@ main() {
         BIND_PORT=50000
     fi
 
-    if ! [ -x ${BACKEND_PATH} ]; then
+    if ! [ -x `which ${BACKEND_PATH}` ]; then
         echo -e "\033[31merror:\033[0m Backend executable is not available." >&2
         exit 2
     fi
@@ -73,7 +73,7 @@ main() {
             ;;
 
         python\.http\.server)
-            exec ${BACKEND_PATH} --module http.server --bind ${BIND_ADDRESS} ${BIND_PORT}
+            exec ${BACKEND_PATH} -m http.server --bind ${BIND_ADDRESS} ${BIND_PORT}
             ;;
         *)
             echo -e "\033[31merror:\033[0m Invalid backend name is provided." >&2
